@@ -1,23 +1,20 @@
 package com.shortlink.service.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class UrlConversionController {
 
     @GetMapping("/shortToLong")
-    public String shortToLong(@RequestBody String shortUrl){
-        System.out.println(shortUrl);
-        return shortUrl;
+    public String shortToLong(@RequestParam String url){
+        System.out.println(url);
+        return url;
     }
 
     @GetMapping("/longToShort")
-    public String LongToShort(@RequestBody String longUrl){
-        System.out.println(longUrl);
-        return longUrl;
+    public String LongToShort(@RequestParam String url){
+        System.out.println(url);
+        return url;
     }
 }
