@@ -1,20 +1,36 @@
 package com.shortlink.service.controller;
 
+import com.shortlink.service.server.UrlConversionServer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:3000")
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class UrlConversionController {
 
+    @Autowired
+    UrlConversionServer urlSConvertServer;
+
     @GetMapping("/shortToLong")
-    public String shortToLong(@RequestParam String url){
+    public void shortToLong(@RequestParam String url, HttpServletResponse response) throws IOException {
         System.out.println(url);
-        return url;
+        response.sendRedirect(url);
     }
 
-    @GetMapping("/longToShort")
-    public String LongToShort(@RequestParam String url){
+    @PostMapping("/longToShort")
+    public String LongToShort(@RequestParam("url") String url, @RequestParam("method") String method){
         System.out.println(url);
-        return url;
+        String shortUrl;
+        if(method.equals("random")){
+            shortUrl = urlSConvertServer.randomLtS(url);
+        }else if(method.equals("base62")){
+            shortUrl = urlSConvertServer.base62LtS(url);
+        }else{
+            shortUrl = method;
+        }
+        return shortUrl;
     }
 }
