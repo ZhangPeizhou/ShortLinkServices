@@ -15,9 +15,9 @@ public class Base62LtS {
     }
 
     public String encode(String url){
-        long numUrl = Long.parseLong(url);
+        long numUrl = url.split("https://www.")[1].split(".com")[0].hashCode();
         String result = base62(numUrl);
-        return  result;
+        return  "http://localhost:7000/stl/"+result;
     }
 
     /*

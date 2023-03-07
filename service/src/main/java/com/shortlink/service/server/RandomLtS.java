@@ -15,7 +15,7 @@ public class RandomLtS {
 
     // Encodes a URL to a shortened URL.
     public String encode(String longUrl) {
-        String shortUrl = "http://";
+        String shortUrl = "http://localhost:7000/stl/";
         for(int i=0; i<Length; i++){
             shortUrl += randomChar();
         }
