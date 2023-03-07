@@ -1,20 +1,28 @@
 package com.shortlink.service.controller;
 
+import com.shortlink.service.services.Services;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:3000")
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class UrlConversionController {
 
-    @GetMapping("/shortToLong")
-    public String shortToLong(@RequestParam String url){
-        System.out.println(url);
-        return url;
+    @Autowired
+    Services services;
+
+    @GetMapping("/stl/*")
+    public void shortToLong(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String longUrl = services.ShortToLong(request.getRequestURL().toString());
+        response.sendRedirect(longUrl);
     }
 
-    @GetMapping("/longToShort")
-    public String LongToShort(@RequestParam String url){
-        System.out.println(url);
-        return url;
+    @PostMapping("/longToShort")
+    public String LongToShort(@RequestParam("url") String url, @RequestParam("method") String method){
+        return services.LongToShort(url, method);
     }
 }
