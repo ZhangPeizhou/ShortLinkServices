@@ -13,7 +13,7 @@ import java.io.IOException;
 public class UrlConversionController {
 
     @Autowired
-    Services services;
+    private Services services;
 
     @GetMapping("/stl/*")
     public void shortToLong(HttpServletRequest request, HttpServletResponse response) throws IOException {
