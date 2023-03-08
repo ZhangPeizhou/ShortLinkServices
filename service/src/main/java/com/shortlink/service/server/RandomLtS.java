@@ -1,11 +1,16 @@
 package com.shortlink.service.server;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import java.util.HashMap;
 import java.util.Random;
 
 public class RandomLtS {
     HashMap<String, String> codeMap = new HashMap<String, String>();
     int Length = 5;
+
+    @Value("${shortToLongUrl}")
+    private String shortToLongUrlValue;
 
     private char randomChar(){
         Random r = new Random();
@@ -15,7 +20,7 @@ public class RandomLtS {
 
     // Encodes a URL to a shortened URL.
     public String encode(String longUrl) {
-        String shortUrl = "http://localhost:7000/stl/";
+        String shortUrl = shortToLongUrlValue;
         for(int i=0; i<Length; i++){
             shortUrl += randomChar();
         }
