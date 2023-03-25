@@ -1,10 +1,13 @@
 package com.shortlink.service.server;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Random;
 
+@Component
 public class RandomLtS {
     HashMap<String, String> codeMap = new HashMap<String, String>();
     int Length = 5;
@@ -21,6 +24,8 @@ public class RandomLtS {
     // Encodes a URL to a shortened URL.
     public String encode(String longUrl) {
         String shortUrl = shortToLongUrlValue;
+        System.out.println("v: "+shortToLongUrlValue);
+        System.out.println("shortUrl: "+shortUrl);
         for(int i=0; i<Length; i++){
             shortUrl += randomChar();
         }

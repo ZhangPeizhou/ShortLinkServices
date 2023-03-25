@@ -22,7 +22,7 @@ public class UrlConversionController {
     }
 
     @PostMapping("/longToShort")
-    public String LongToShort(@RequestParam("url") String url, @RequestParam("method") String method){
+    public String LongToShort(@RequestParam("url") String url, @RequestParam("method") String method) throws Exception {
         return services.LongToShort(url, method);
     }
 }

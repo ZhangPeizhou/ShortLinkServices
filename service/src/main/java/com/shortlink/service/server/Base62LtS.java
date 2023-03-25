@@ -1,7 +1,9 @@
 package com.shortlink.service.server;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Base62LtS {
     @Value("${shortToLongUrl}")
     private String shortToLongUrlValue;
@@ -19,9 +21,9 @@ public class Base62LtS {
         return result;
     }
 
-    public String encode(String url){
-        long numUrl = url.hashCode();
-        String result = base62(numUrl);
+    public String encode(long id){
+        //long numUrl = url.hashCode();
+        String result = base62(id);
         return  shortToLongUrlValue+result;
     }
 
